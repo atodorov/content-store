@@ -18,13 +18,9 @@ tests: sandbox
 dist: sandbox
 	cabal configure
 	cabal sdist
+	ln dist/content-store-*.tar.gz dist/content-store-latest.tar.gz
 
 ci: tests hlint
 
 ci_after_success: dist
-	if [ -z "$$(which hpc-coveralls)" ]; then \
-		echo hpc-coveralls not found in PATH - install it; \
-		exit 1; \
-	else \
-		hpc-coveralls --display-report spec; \
-	fi
+	./scripts/hpc-coveralls

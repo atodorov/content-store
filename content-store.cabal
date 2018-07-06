@@ -15,7 +15,8 @@ build-type:          Simple
 cabal-version:       >= 1.10
 
 extra-source-files:  ChangeLog.md,
-                     Makefile
+                     Makefile,
+                     scripts/hpc-coveralls,
                      tests/*.hs,
                      tests/Data/*.hs,
                      tests/Data/ContentStore/*.hs
@@ -52,12 +53,27 @@ library
                      unix >= 2.7.2.1 && < 2.8.0.0
 
   default-language:  Haskell2010
+
+  default-extensions: LambdaCase,
+                      MultiWayIf,
+                      OverloadedStrings,
+                      RecordWildCards
+
   ghc-options:       -Wall
+                     -Wincomplete-uni-patterns
+                     -Wincomplete-record-updates
+                     -Wredundant-constraints
+                     -Wcompat
 
 test-suite spec
-  type: exitcode-stdio-1.0
-  main-is: Spec.hs
-  hs-source-dirs: tests
+  type:             exitcode-stdio-1.0
+
+  main-is:          Spec.hs
+  hs-source-dirs:   tests
+
+  other-modules:    Data.ContentStore.DigestSpec,
+                    Data.ContentStoreSpec
+
   build-depends:    base == 4.*,
                     bytestring >= 0.10 && < 0.11,
                     conduit >= 1.0.11 && < 1.4,
@@ -72,4 +88,14 @@ test-suite spec
                     content-store
 
   default-language: Haskell2010
-  ghc-options: -Wall
+
+  default-extensions: LambdaCase,
+                      MultiWayIf,
+                      OverloadedStrings,
+                      RecordWildCards
+
+  ghc-options:      -Wall
+                    -Wincomplete-uni-patterns
+                    -Wincomplete-record-updates
+                    -Wredundant-constraints
+                    -Wcompat

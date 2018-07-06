@@ -1,4 +1,3 @@
-{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE ExistentialQuantification #-}
 
@@ -61,7 +60,7 @@ instance Show ObjectDigest where
 -- PRIVATE FUNCTIONS
 --
 
-fromDigest :: HashAlgorithm a => Digest a -> ObjectDigest
+fromDigest :: Digest a -> ObjectDigest
 fromDigest = ObjectDigest . convert
 
 hashLazyWith :: HashAlgorithm a => a -> LBS.ByteString -> Digest a
